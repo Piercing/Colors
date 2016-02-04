@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface MGCColors : NSObject
+
+// Method = > return UIColor aleatory random
+-(UIColor *)randomColor;
 
 @end

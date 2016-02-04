@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MGCColors.h"
+#import "MGCColorfulViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,30 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    
+    // Creo el modelo
+    MGCColors *model = [[MGCColors alloc]init];
+    
+    // Creo el layout
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
+    // Configuro el layoyt
+    layout.itemSize = CGSizeMake(100, 50);
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    
+    // Creo el controlador
+    MGCColorfulViewController *cVC = [[MGCColorfulViewController alloc]initWithModel:model
+                                                                              layout:layout];
+    
+    // Lo meto en un navigation
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:cVC];
+    
+    // Lo muestro
+    self.window.rootViewController = navVC;
+    
+    // Muestro la ventana
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

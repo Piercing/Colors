@@ -13,6 +13,7 @@
 		52C53BB81C62C24B00D1BFDF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52C53BB61C62C24B00D1BFDF /* LaunchScreen.storyboard */; };
 		52C53BC31C62C24C00D1BFDF /* CollectionSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BC21C62C24C00D1BFDF /* CollectionSampleTests.m */; };
 		52C53BD01C62C31100D1BFDF /* MGCColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BCF1C62C31100D1BFDF /* MGCColors.m */; };
+		52C53BD41C62C82C00D1BFDF /* MGCColorfulViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BD31C62C82C00D1BFDF /* MGCColorfulViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,8 @@
 		52C53BC41C62C24C00D1BFDF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52C53BCE1C62C31100D1BFDF /* MGCColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCColors.h; sourceTree = "<group>"; };
 		52C53BCF1C62C31100D1BFDF /* MGCColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCColors.m; sourceTree = "<group>"; };
+		52C53BD21C62C82C00D1BFDF /* MGCColorfulViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCColorfulViewController.h; sourceTree = "<group>"; };
+		52C53BD31C62C82C00D1BFDF /* MGCColorfulViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCColorfulViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,7 @@
 		52C53BA71C62C24B00D1BFDF /* CollectionSample */ = {
 			isa = PBXGroup;
 			children = (
+				52C53BD11C62C7A600D1BFDF /* Controllers */,
 				52C53BCD1C62C2F400D1BFDF /* Models */,
 				52C53BAB1C62C24B00D1BFDF /* AppDelegate.h */,
 				52C53BAC1C62C24B00D1BFDF /* AppDelegate.m */,
@@ -114,6 +118,15 @@
 				52C53BCF1C62C31100D1BFDF /* MGCColors.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		52C53BD11C62C7A600D1BFDF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				52C53BD21C62C82C00D1BFDF /* MGCColorfulViewController.h */,
+				52C53BD31C62C82C00D1BFDF /* MGCColorfulViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +232,7 @@
 			files = (
 				52C53BD01C62C31100D1BFDF /* MGCColors.m in Sources */,
 				52C53BAD1C62C24B00D1BFDF /* AppDelegate.m in Sources */,
+				52C53BD41C62C82C00D1BFDF /* MGCColorfulViewController.m in Sources */,
 				52C53BAA1C62C24B00D1BFDF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
