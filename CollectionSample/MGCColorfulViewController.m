@@ -10,28 +10,32 @@
 #import "MGCColors.h"
 
 @interface MGCColorfulViewController ()
+// Modelo
 @property(strong, nonatomic)MGCColors *model;
-// Otra de forma de definir una constante
-//+(NSInteger) maxRandomColorToDisplay;
+// Cantidad de colores aleatorios
+@property (nonatomic)NSInteger maxRandomColorToDisplay;
 @end
 
 @implementation MGCColorfulViewController
 
 // Otras formaa de definir una constante
 static NSString * const reuseIdentifier = @"Cell";
-// Cantidad de colores aleatorios
-static NSInteger  const maxRandomColorToDisplay = 104;// => + (NSInteger) maxRandomColorToDisplay{return 104;};
+
+
 // Cuantas celdas para colores de gradiente voy a tener
 static NSInteger const maxGradientColorsToDisplay = 104;
 // Necesito un ID para las celdas de gradiente para más
 // adelante añadirles algún extra y así puedo distinguirlas.
 static NSString * const gradientColorCellId = @"gradientColorCell";
 // Necesito las dos secciones
-static NSInteger const randomColorSection = 1;
-static NSInteger const gradientColorSection = 0;
+static NSInteger const randomColorSection = 0;
+static NSInteger const gradientColorSection = 1;
 
 // Constante para el tipo de vista para las cabeceras
 static NSString * const sectionHeaderId = @"sectionHeaderId";
+
+#pragma mark - Properties
+
 
 #pragma mark -  Class methods
 //+ (NSInteger) maxRandomColorToDisplay{return 104;};
@@ -45,6 +49,7 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
         
         _model = model;
         self.title = @"United Color of MGC";
+        _maxRandomColorToDisplay = 104;
     }
     return self;
 }
@@ -67,7 +72,14 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
             forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                    withReuseIdentifier:sectionHeaderId];
     
-    // Do any additional setup after loading the view.
+    // Creo un botón para añadir colores aleatorios
+    UIBarButtonItem *addColor = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                             target:self
+                                                                             action:@selector(addNewRandomColor:)];
+    
+    // Añado el botón a la barra
+    self.navigationItem.rightBarButtonItem = addColor;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,7 +107,7 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
      numberOfItemsInSection:(NSInteger)section {
     
     if (section == randomColorSection) {
-        return maxRandomColorToDisplay;
+        return  self.maxRandomColorToDisplay;
     }else{
         return maxGradientColorsToDisplay;
     }
@@ -170,6 +182,22 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
     }
     // Devuelvo la subvista
     return supView;
+}
+
+#pragma mark - Actions
+-(void) addNewRandomColor:(id)sender{
+    
+    // Primero actualizo el modelo indicándole que a los colores aleatorios
+    // le sume uno para añadirlo y mostrarlo en su sección en la CollectionView.
+    self.maxRandomColorToDisplay = self.maxRandomColorToDisplay + 1;
+    
+    // Le decimos ahora a la collectionView que añada una nueva celda para el nuevo color
+    // o que añada al array del indexpaths que añada las celdas según colores se creen, es
+    // decir, le decimos, por ejemplo, se han insertado tres colores nuevos en la seeción 0.
+    // Lo que hace la collectionView a continuación es pedirle a su DataSource, oye dame éste,
+    // éste y e´ste de la sección 0.
+    // En 'indexPathForItem' le indicamos la posición dentro de la sección => 0 y en la sección => 'randomColorSection'
+    [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:randomColorSection]]];
 }
 
 #pragma mark <UICollectionViewDelegate>
