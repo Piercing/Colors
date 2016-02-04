@@ -14,4 +14,7 @@
 // Method = > return UIColor aleatory random
 -(UIColor *)randomColor;
 
+
+-(UIColor *) colorInGradientAt:(NSUInteger)current
+                            to:(NSUInteger)maximum;
 @end

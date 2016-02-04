@@ -28,8 +28,11 @@
     // Creo el layout
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
     // Configuro el layoyt
-    layout.itemSize = CGSizeMake(100, 50);
+    layout.itemSize = CGSizeMake(128, 50);
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+    layout.minimumInteritemSpacing = 5;
+    layout.headerReferenceSize = CGSizeMake(60, 60);
     
     // Creo el controlador
     MGCColorfulViewController *cVC = [[MGCColorfulViewController alloc]initWithModel:model

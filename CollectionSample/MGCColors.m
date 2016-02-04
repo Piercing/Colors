@@ -10,6 +10,19 @@
 
 @implementation MGCColors
 
+// Método que devuelve un color partiendo de un
+// color con un máximo de gradiente que le indiquemos.
+-(UIColor *) colorInGradientAt:(NSUInteger)current
+                            to:(NSUInteger)maximum{
+    
+    // calculo el color actual
+    float currentHue = (current *1.0f) / (maximum * 1.0f);
+    
+    return [UIColor colorWithHue:currentHue
+                      saturation:1.0
+                      brightness:0.8
+                           alpha:1.0];
+}
 
 -(UIColor *)randomColor{
 

@@ -12,17 +12,26 @@
 @interface MGCColorfulViewController ()
 @property(strong, nonatomic)MGCColors *model;
 // Otra de forma de definir una constante
-+(NSInteger) maxRandomColorToDisplay;
+//+(NSInteger) maxRandomColorToDisplay;
 @end
 
 @implementation MGCColorfulViewController
 
-// Otra de forma de definir una constante
+// Otras formaa de definir una constante
 static NSString * const reuseIdentifier = @"Cell";
-
+// Cantidad de colores aleatorios
+static NSInteger  const maxRandomColorToDisplay = 104;// => + (NSInteger) maxRandomColorToDisplay{return 104;};
+// Cuantas celdas para colores de gradiente voy a tener
+static NSInteger const maxGradientColorsToDisplay = 104;
+// Necesito un ID para las celdas de gradiente para más
+// adelante añadirles algún extra y así puedo distinguirlas.
+static NSString * const gradientColorCellId = @"gradientColorCell";
+// Necesito las dos secciones
+static NSInteger const randomColorSection = 1;
+static NSInteger const gradientColorSection = 0;
 
 #pragma mark -  Class methods
-+ (NSInteger) maxRandomColorToDisplay{return 104;};
+//+ (NSInteger) maxRandomColorToDisplay{return 104;};
 
 
 #pragma mark - Init
@@ -48,6 +57,8 @@ static NSString * const reuseIdentifier = @"Cell";
     // Register cell classes, ya que utilizamos celdas por defecto,
     // si utilizamos celdas personalizadas registramos el nib o XIB.
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    // Registro el otro tipo de celda
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:gradientColorCellId];
     
     // Do any additional setup after loading the view.
 }
@@ -70,22 +81,37 @@ static NSString * const reuseIdentifier = @"Cell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return 2;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [MGCColorfulViewController maxRandomColorToDisplay];
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section {
+    
+    if (section == randomColorSection) {
+        return maxRandomColorToDisplay;
+    }else{
+        return maxGradientColorsToDisplay;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
-                                                                           forIndexPath:indexPath];
+    UICollectionViewCell *cell;
     
-    // Le doy un color aleatorio a la ceda 
-    cell.backgroundColor = [self.model randomColor];
-    
+    if (indexPath.section == randomColorSection) {
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
+                                                         forIndexPath:indexPath];
+        // Le doy un color aleatorio a la ceda
+        cell.backgroundColor = [self.model randomColor];
+    }else{
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:gradientColorCellId
+                                                         forIndexPath:indexPath];
+        
+        // 'colorInGradientAt:indexPath.item' => celda actual
+        cell.backgroundColor = [self.model colorInGradientAt:indexPath.item
+                                                          to:maxGradientColorsToDisplay];
+    }
     return cell;
 }
 
