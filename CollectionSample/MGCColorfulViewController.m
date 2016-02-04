@@ -30,6 +30,9 @@ static NSString * const gradientColorCellId = @"gradientColorCell";
 static NSInteger const randomColorSection = 1;
 static NSInteger const gradientColorSection = 0;
 
+// Constante para el tipo de vista para las cabeceras
+static NSString * const sectionHeaderId = @"sectionHeaderId";
+
 #pragma mark -  Class methods
 //+ (NSInteger) maxRandomColorToDisplay{return 104;};
 
@@ -46,7 +49,7 @@ static NSInteger const gradientColorSection = 0;
     return self;
 }
 
-
+#pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -59,6 +62,10 @@ static NSInteger const gradientColorSection = 0;
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     // Registro el otro tipo de celda
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:gradientColorCellId];
+    // Registro el tipo de vista para las cabeceras, esta es la que se usa para pies y cabeceras.
+    [self.collectionView registerClass:[UICollectionReusableView class]
+            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                   withReuseIdentifier:sectionHeaderId];
     
     // Do any additional setup after loading the view.
 }
@@ -113,6 +120,56 @@ static NSInteger const gradientColorSection = 0;
                                                           to:maxGradientColorsToDisplay];
     }
     return cell;
+}
+
+-(UICollectionReusableView *) collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath{
+    
+    UICollectionReusableView *supView;
+    
+    // si es una cabecera
+    if (kind == UICollectionElementKindSectionHeader) {
+        // Reciclamos un header si lo hay, lo configuramos y lo devolvemos.
+        // Le pido a la collectionView si tiene alguno por ahí
+        supView = [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                                     withReuseIdentifier:sectionHeaderId
+                                                            forIndexPath:indexPath];
+        
+        // Configuro la cabecera
+        supView.backgroundColor = [UIColor colorWithWhite:0.65
+                                                    alpha:1.0];
+        
+        // Compruebo si tiene subvistas para borrarlas antes de reusarlas
+        // y no sobreescribir texto en el label de la vista de la cabecera.
+        // La forma de hacerlo es con 'prepareForReuse', se verá más adelante.
+        // Toda vista tiene una propiedad que es un array de subvistas llamada 'subviews'
+        // Recorremos todas estas subvistas y vamos borrando su contenido antes de reutilizarla.
+        // No podemos decirle una vista que elimine todas sus subvistas. Para eliminar una vista
+        // de una jerarquía tenemos que decirle a la subvista: 'quítate de tu supervista', y para
+        // añadirlo es al revés, le decimos a la supervista añade esto.
+        for (UIView *each in supView.subviews) {
+            [each removeFromSuperview];
+        }
+        
+        
+        // Le meto una etiqueta, dependiendo de la sección serán colores aleatorios o gradientes.
+        // Le endoso el mismo tamaño que tenga la vista.
+        UILabel *title = [[UILabel alloc]initWithFrame:supView.bounds];
+        // Le asigno un color
+        title.textColor = [UIColor whiteColor];
+        // Le endoso a la subvista el título.
+        [supView addSubview:title];
+        // Si la sección es de colores grandientes => título: Gradient
+        if(indexPath.section == gradientColorSection){
+            title.text = @"Gradient";
+            // Sino => título: Random
+        }else{
+            title.text = @"Random";
+        }
+    }
+    // Devuelvo la subvista
+    return supView;
 }
 
 #pragma mark <UICollectionViewDelegate>
