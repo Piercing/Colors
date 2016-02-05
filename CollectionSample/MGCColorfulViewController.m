@@ -8,6 +8,8 @@
 
 #import "MGCColorfulViewController.h"
 #import "MGCColors.h"
+#import "MGCRandomColorCell.h"
+#import "UIColor+Colorful.h"
 
 @interface MGCColorfulViewController ()
 // Modelo
@@ -23,13 +25,19 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 // Cuantas celdas para colores de gradiente voy a tener
-static NSInteger const maxGradientColorsToDisplay = 599;
+static NSInteger const maxGradientColorsToDisplay = 104;
 // Necesito un ID para las celdas de gradiente para más
 // adelante añadirles algún extra y así puedo distinguirlas.
 static NSString * const gradientColorCellId = @"gradientColorCell";
+// Necesito un ID para las celdas random para más
+// adelante añadirles algún extra y así puedo distinguirlas.
+static NSString * const randomColorCellId = @"randomColor";
+
 // Necesito las dos secciones
 static NSInteger const randomColorSection = 0;
 static NSInteger const gradientColorSection = 1;
+
+
 
 // Constante para el tipo de vista para las cabeceras
 static NSString * const sectionHeaderId = @"sectionHeaderId";
@@ -64,7 +72,8 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
     
     // Register cell classes, ya que utilizamos celdas por defecto,
     // si utilizamos celdas personalizadas registramos el nib o XIB.
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    //[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self registerSectionHeaderCell];
     // Registro el otro tipo de celda
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:gradientColorCellId];
     // Registro el tipo de vista para las cabeceras, esta es la que se usa para pies y cabeceras.
@@ -82,6 +91,17 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
     
 }
 
+-(void)registerSectionHeaderCell{
+    
+    // Leo el nib
+    UINib *nib = [UINib nibWithNibName:@"MGCRandomColorCell" bundle:nil];
+    
+    // Lo registro
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:randomColorCellId];
+    
+}
+
+#pragma mark - Memory management
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -116,22 +136,25 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell;
-    
     if (indexPath.section == randomColorSection) {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier
-                                                         forIndexPath:indexPath];
-        // Le doy un color aleatorio a la ceda
-        cell.backgroundColor = [self.model randomColor];
+        
+        // Pido a ver si tiene alguna celda por ahí
+        MGCRandomColorCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:randomColorCellId
+                                                                             forIndexPath:indexPath];
+        
+        cell.color = [self.model randomColor];
+        return cell;
+        
     }else{
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:gradientColorCellId
-                                                         forIndexPath:indexPath];
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:gradientColorCellId
+                                                                               forIndexPath:indexPath];
         
         // 'colorInGradientAt:indexPath.item' => celda actual
         cell.backgroundColor = [self.model colorInGradientAt:indexPath.item
                                                           to:maxGradientColorsToDisplay];
+        return cell;
     }
-    return cell;
+    
 }
 
 -(UICollectionReusableView *) collectionView:(UICollectionView *)collectionView
@@ -201,6 +224,13 @@ static NSString * const sectionHeaderId = @"sectionHeaderId";
 }
 
 #pragma mark <UICollectionViewDelegate>
+-(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == randomColorSection) {
+        MGCRandomColorCell *cell = (MGCRandomColorCell*)[collectionView cellForItemAtIndexPath:indexPath];
+        cell.color = [cell.color complementaryColor];
+    }
+}
 
 /*
  // Uncomment this method to specify if the specified item should be highlighted during tracking
