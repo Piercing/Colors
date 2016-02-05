@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		522139B91C65139F0047BB9C /* UIColor+Colorful.m in Sources */ = {isa = PBXBuildFile; fileRef = 522139B81C65139F0047BB9C /* UIColor+Colorful.m */; };
 		52C53BAA1C62C24B00D1BFDF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BA91C62C24B00D1BFDF /* main.m */; };
 		52C53BAD1C62C24B00D1BFDF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BAC1C62C24B00D1BFDF /* AppDelegate.m */; };
 		52C53BB51C62C24B00D1BFDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52C53BB41C62C24B00D1BFDF /* Assets.xcassets */; };
@@ -14,6 +15,8 @@
 		52C53BC31C62C24C00D1BFDF /* CollectionSampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BC21C62C24C00D1BFDF /* CollectionSampleTests.m */; };
 		52C53BD01C62C31100D1BFDF /* MGCColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BCF1C62C31100D1BFDF /* MGCColors.m */; };
 		52C53BD41C62C82C00D1BFDF /* MGCColorfulViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BD31C62C82C00D1BFDF /* MGCColorfulViewController.m */; };
+		52C53BD81C62EFDB00D1BFDF /* MGCRandomColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C53BD71C62EFDB00D1BFDF /* MGCRandomColorCell.m */; };
+		52C53BDA1C62F02100D1BFDF /* MGCRandomColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52C53BD91C62F02100D1BFDF /* MGCRandomColorCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		522139B71C65139F0047BB9C /* UIColor+Colorful.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Colorful.h"; sourceTree = "<group>"; };
+		522139B81C65139F0047BB9C /* UIColor+Colorful.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Colorful.m"; sourceTree = "<group>"; };
 		52C53BA51C62C24B00D1BFDF /* CollectionSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52C53BA91C62C24B00D1BFDF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		52C53BAB1C62C24B00D1BFDF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -41,6 +46,9 @@
 		52C53BCF1C62C31100D1BFDF /* MGCColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCColors.m; sourceTree = "<group>"; };
 		52C53BD21C62C82C00D1BFDF /* MGCColorfulViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCColorfulViewController.h; sourceTree = "<group>"; };
 		52C53BD31C62C82C00D1BFDF /* MGCColorfulViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCColorfulViewController.m; sourceTree = "<group>"; };
+		52C53BD61C62EFDB00D1BFDF /* MGCRandomColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGCRandomColorCell.h; sourceTree = "<group>"; };
+		52C53BD71C62EFDB00D1BFDF /* MGCRandomColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGCRandomColorCell.m; sourceTree = "<group>"; };
+		52C53BD91C62F02100D1BFDF /* MGCRandomColorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MGCRandomColorCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		522139BA1C6513AA0047BB9C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				522139B71C65139F0047BB9C /* UIColor+Colorful.h */,
+				522139B81C65139F0047BB9C /* UIColor+Colorful.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		52C53B9C1C62C24B00D1BFDF = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +99,8 @@
 		52C53BA71C62C24B00D1BFDF /* CollectionSample */ = {
 			isa = PBXGroup;
 			children = (
+				522139BA1C6513AA0047BB9C /* Categories */,
+				52C53BD51C62EF9E00D1BFDF /* Views */,
 				52C53BD11C62C7A600D1BFDF /* Controllers */,
 				52C53BCD1C62C2F400D1BFDF /* Models */,
 				52C53BAB1C62C24B00D1BFDF /* AppDelegate.h */,
@@ -127,6 +146,16 @@
 				52C53BD31C62C82C00D1BFDF /* MGCColorfulViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		52C53BD51C62EF9E00D1BFDF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				52C53BD61C62EFDB00D1BFDF /* MGCRandomColorCell.h */,
+				52C53BD71C62EFDB00D1BFDF /* MGCRandomColorCell.m */,
+				52C53BD91C62F02100D1BFDF /* MGCRandomColorCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52C53BDA1C62F02100D1BFDF /* MGCRandomColorCell.xib in Resources */,
 				52C53BB81C62C24B00D1BFDF /* LaunchScreen.storyboard in Resources */,
 				52C53BB51C62C24B00D1BFDF /* Assets.xcassets in Resources */,
 			);
@@ -234,6 +264,8 @@
 				52C53BAD1C62C24B00D1BFDF /* AppDelegate.m in Sources */,
 				52C53BD41C62C82C00D1BFDF /* MGCColorfulViewController.m in Sources */,
 				52C53BAA1C62C24B00D1BFDF /* main.m in Sources */,
+				52C53BD81C62EFDB00D1BFDF /* MGCRandomColorCell.m in Sources */,
+				522139B91C65139F0047BB9C /* UIColor+Colorful.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +444,7 @@
 				52C53BC91C62C24C00D1BFDF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52C53BCA1C62C24C00D1BFDF /* Build configuration list for PBXNativeTarget "CollectionSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +453,7 @@
 				52C53BCC1C62C24C00D1BFDF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

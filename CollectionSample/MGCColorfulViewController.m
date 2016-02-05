@@ -23,7 +23,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 // Cuantas celdas para colores de gradiente voy a tener
-static NSInteger const maxGradientColorsToDisplay = 104;
+static NSInteger const maxGradientColorsToDisplay = 599;
 // Necesito un ID para las celdas de gradiente para más
 // adelante añadirles algún extra y así puedo distinguirlas.
 static NSString * const gradientColorCellId = @"gradientColorCell";
