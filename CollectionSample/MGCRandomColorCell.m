@@ -36,7 +36,7 @@
 
 #pragma mark - View Lifecycle
 // Se utiliza para devolver a la celda a un estado nulo o
-// inicial cuando en ésta no va a habe ninguna animación.
+// inicial cuando en ésta no va a haber ninguna animación.
 -(void)prepareForReuse{
     [super prepareForReuse];
     
